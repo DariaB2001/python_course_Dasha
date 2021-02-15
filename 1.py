@@ -4,13 +4,13 @@ def season(number):
     summer = [6, 7, 8]
     autumn = [9, 10, 11]
     if number in winter:
-        season = 'зима'
+        season = 'Зима'
     if number in spring:
-        season = 'весна'
+        season = 'Весна'
     if number in summer:
-        season = 'лето'
+        season = 'Лето'
     if number in autumn:
-        season = 'осень'
+        season = 'Осень'
     return print(season)
 
 
