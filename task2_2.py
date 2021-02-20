@@ -6,7 +6,8 @@ with open('stage3_test.csv') as csvfile1:
         writer = csv.DictWriter(csvfile2, fieldnames=fieldnames)
         writer.writeheader()
         for row in spamreader:
-            if type(row[-1]) != str:  # проверяем, что последний объект списка - не строка
+            if row[-1] != 'Price':  # проверяем, что последний объект списка - не слово Price (это так
+                #  только для списка с названиями столбцов => программа падает с ошибкой
                 price = float(row[-1])
                 if 10000 < price <= 50000:  # проверяем, попадает ли цена в диапазон от 10 тысяч до 50 тысяч
                     writer.writerow({'Id': row[0], 'Images': row[1], 'Title': row[2],
