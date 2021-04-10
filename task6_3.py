@@ -12,7 +12,4 @@ for act in acts:  # в цикле перебираем акты пьесы (эт
         # "character" (то есть имя персонажа) и "says" (то есть его реплика)
         for a in action:
             cnt[a['character']] += 1
-list_d = list(cnt.items())
-list_d.sort(key=lambda t: t[1], reverse=True)
-for t in list_d:
-    print(t[0], ':', t[1])
+print(cnt.most_common())
