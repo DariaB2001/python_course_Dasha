@@ -9,4 +9,4 @@ def ask_time(number):
         pass
 
 
-ask_time(number=int(input('Введите, пожалуйста, целое число: ')))
+ask_time(number=int(input('Введите, пожалуйста, целое число:')))
