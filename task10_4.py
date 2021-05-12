@@ -26,6 +26,14 @@ class Person:
         else:
             print('Паспорт в нашей стране меняют в 20 и в 45 лет, так что потерпите')
 
+    def get_age(self):
+        print(f'Ваш возраст - {self.__age}')
+        return self.__age
+
+    def get_passport_data(self):
+        print(f'Ваши паспортные данные: {self.__passport_data}')
+        return self.__passport_data
+
 
 girl = Person('Галя', 17, 501435988)
 girl.change_name('Эрика')
