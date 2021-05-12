@@ -4,20 +4,18 @@ class Smartphone:
         self.owner = owner
         self.__password = password
         self.number_of_photos = 0
+        self.blocking = True  # по умолчанию телефон заблокирован
 
     def __unblock(self, password):
-        global blocking
         if self.__password == password:
-            blocking = False  # блокировка снята
-        else:
-            blocking = True  # телефон заблокирован
+            self.blocking = False  # блокировка снята
 
     def take_photo(self, password):
         self.__unblock(password)
-        if blocking == True:
-            self.number_of_photos += 1
-        else:
-            print('Неверный пароль, вы не можете фотографировать')
+        if not self.blocking:  # если телефон разблокирован
+            self.number_of_photos += 1  # тогда сфотографировать
+        else:  # если телефон заблокирован
+            print('Неверный пароль, вы не можете фотографировать')  # тогда сфотографировать не получится
 
 
 phone = Smartphone('Kate', 'open')
