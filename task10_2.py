@@ -16,6 +16,7 @@ class BankAccount:
     def get_balance(self, password):
         if self.__password == password:
             print(f'Баланс вашего счёта - {str(self.__balance)}')
+            return self.__balance
         else:
             print('Вы самозванец, мы вам не скажем баланс счёта')
 
