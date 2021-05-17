@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as etree
 
 
-class Corpus():
+class Corpus:
 
     def __init__(self):
         self._sentences = []  # список всех предложений корпуса
@@ -19,51 +19,59 @@ class Corpus():
                     word_str = token.get('text')  # строковое представление слова
                     word = Word(word_str)
                     for g in token.iter('g'):
-                        word._grams.append(g.get('v'))  # добавляем граммемы в список _grams
-                    final_sentence._words.append(word)  # добавляем слово к списку слов для данного предложения
+                        word.grams.append(g.get('v'))  # добавляем граммемы в список _grams
+                    final_sentence.words.append(word)  # добавляем слово к списку слов для данного предложения
 
             self._sentences.append(final_sentence)
 
     def get_sentence_by_id(self, id=None):
-        if id == None:
+        if id is None:
             id = int(input('Введите номер предложения: '))
-        if id >= 0 and id < len(self._sentences):
+        if 0 <= id < len(self._sentences):
             return self._sentences[id]
         else:
             print('Некорректный номер предложения')
             return None
 
 
-class Sentence():
+class Sentence:
 
     def __init__(self, sentence_str):
         self._words = []  # списое слов предложения
         self._sentence_str = sentence_str  # строковое представление предложения
 
     def get_word_by_id(self, id=None):
-        if id == None:
+        if id is None:
             id=int(input('Введите номер слова: '))
-        if id >= 0 and id < len(self._words):
+        if 0 <= id < len(self._words):
             return self._words[id]
         else:
             print('Некорректный номер слова')
             return None
 
+    @property
+    def words(self):
+        return self._words
 
-class Word():
+
+class Word:
 
     def __init__(self, word_str):
         self._grams = []  # список граммем слова
         self._word_str = word_str  # строковое представление слова
 
     def get_grammar_by_id(self, id=None):
-        if id == None:
-            id=int(input('Введите номер граммемы: '))
-        if id >= 0 and id < len(self._grams):
+        if id is None:
+            id = int(input('Введите номер граммемы: '))
+        if 0 <= id < len(self._grams):
             return self._grams[id]
         else:
             print('Некорректный номер граммемы')
             return None
+
+    @property
+    def grams(self):
+        return self._grams
 
 
 if __name__ == '__main__':
