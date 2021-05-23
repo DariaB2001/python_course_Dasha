@@ -5,7 +5,7 @@ from tf_idf import TF_IDF
 class MyTestCase(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.tf_idf = TF_IDF('idf.json', '/home/dasha/PycharmProjects/22.05.2021/idf.json', 'texts_collection.txt')
+        self.tf_idf = TF_IDF('/home/dasha/PycharmProjects/python_course_Dasha/idf.json', 'texts_collection.txt')
 
     def test_not_zero(self):  # проверяем, что слова встречаются в текстах НЕ 0 раз, чтобы не было ошибки деления на 0
         with open('texts_collection.txt', 'r') as f2:
@@ -28,7 +28,7 @@ class MyTestCase(unittest.TestCase):
                 self.assertNotEqual(n, 0)
 
     def test_not_empty(self):  # проверяем, что файл непустой
-        idf_dict = self.tf_idf.load('idf.json')
+        idf_dict = self.tf_idf.get_load('idf.json')
         self.assertGreater(len(idf_dict), 0)
 
 
