@@ -7,9 +7,9 @@ class TF_IDF:
 
     def __init__(self, path, texts_collection):
         if os.path.exists(path):
-            self.idf = self._load(path)
+            self._idf = self._load(path)
         else:
-            self.idf = self._count_idf(texts_collection)
+            self._idf = self._count_idf(texts_collection)
 
     def _load(self, path):
         with open(path, 'r') as f1:
@@ -18,6 +18,9 @@ class TF_IDF:
 
     def get_load(self, path):
         return self._load(path)
+
+    def get_idf(self):
+        return self._idf
 
     def _count_idf(self, texts_collection):
         with open(texts_collection, 'r') as f2:
@@ -52,10 +55,13 @@ class TF_IDF:
             words_list.append(word_raw.strip('.,!?"(){}[]«»').lower())  # список слов текста
         words = list(set(words_list))
         for word in words:
-            n = words.count(word)
+            n = words_list.count(word)
             tf = n / len(words_list)
             tf_dict[word] = tf
         return tf_dict
+
+    def get_count_tf(self, text):
+        return self._count_tf(text)
 
     def count_tf_idf(self, text):  # функция, принимающая на входе текст от пользователя
         # и возвращающая словарь вида {слово: его TF-IDF}
@@ -63,15 +69,13 @@ class TF_IDF:
         text_tf_dict = self._count_tf(text)  # считаем tf для данного текста
         text_idf_dict = {}  # словарь со значениями IDF для данного конкретного текста
         for word in text_tf_dict.keys():
-            if word in self.idf.keys():
-                text_idf_dict[word] = self.idf[word]
+            if word in self._idf.keys():
+                text_idf_dict[word] = self._idf[word]
+        for word, tf in text_tf_dict.items():
+            if word in self._idf.keys():
+                tf_idf_dict[word] = tf * self._idf[word]
             else:
-                text_idf_dict[word] = 0
-        for word in text_tf_dict.keys():
-            tf = text_tf_dict[word]
-            idf = text_idf_dict[word]
-            tf_idf = tf*idf
-            tf_idf_dict[word] = tf_idf
+                tf_idf_dict[word] = 0
         return tf_idf_dict
 
 
